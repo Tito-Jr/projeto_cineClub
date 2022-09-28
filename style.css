@@ -1,31 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,200&display=swap');
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Times New Roman', Times, serif;
+    background-color: #22254b;
+    font-family: 'poppins', sans-serif;
     margin: 0;
 }
 
 main {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .movie {
-    border-radius: 3px;
+    background-color: #373b69;
+    border-radius: 10px;
     box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    overflow: hidden;
+    margin: 1rem;
+    width: 265px;
     
 }
 
 .movie img {
-    max-width: 100%;
+    width: 100%;
 }
 
 .movie-info {
+    color: #eee;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 1px;
 }
+
+.movie-info h3 {
+    margin: auto;
+}
+
+.movie-info span {
+    background-color: #22254b;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+}
+
+.movie-info span.green {
+    color: rgb(29, 186, 29);
+}
+.movie-info span.orange {
+    color: orange;
+}
+.movie-info span.red {
+    color: rgb(255, 2, 2);
+}
+
 
