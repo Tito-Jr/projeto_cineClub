@@ -9,6 +9,14 @@ body {
     margin: 0;
 }
 
+h1 {
+    display: flex;  
+    font-style: bold;
+    justify-content: center;
+    color: #eee;
+    font-family: 'poppins', sans-serif;
+    letter-spacing: 1px;
+}
 
 main {
     display: flex;
