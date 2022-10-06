@@ -61,7 +61,10 @@ class WebServer:
             return str('HTTP/1.1 404 NOT FOUND\n\n<h1>File Not Found</h1>').encode()
 
     def __get(self, request_file):
-        pass
+        if request_file == '/':
+            return self.__response_header('/index.html')
+        else:
+            return self.__response_header(request_file)
 
     def __post(self):
         pass
