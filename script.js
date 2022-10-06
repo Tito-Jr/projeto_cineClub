@@ -1,14 +1,27 @@
 const apiurl = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1'
 const imgpath = 'http://image.tmdb.org/t/p/w1280'
+const searchapi = 'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query='
 
-const main = document.querySelector('main')
+const main = document.getElementById('main')
+const form = document.getElementById('form')
+const search = document.getElementById('search')
 
-async function getMovies(){
-    const resp = await fetch(apiurl)
+getMovies(apiurl)
+
+async function getMovies(url){
+    const resp = await fetch(url)
     const respData = await resp.json()
 
-    respData.results.forEach(movie => {
-        const {poster_path, title, vote_average} = movie
+
+    showMovies(respData.results)
+}
+
+function showMovies(movies) {
+
+    main.innerHTML = ''
+
+    movies.forEach(movie => {
+        const {poster_path, title, vote_average, overview} = movie
         const movieEl = document.createElement('div')
         movieEl.classList.add('movie')
 
@@ -20,12 +33,14 @@ async function getMovies(){
                 <span class="${getClassByRate
                     (vote_average)}">${vote_average}</span>
             </div>
+            <div class="overview">
+                <h3>Movie Info</h3>    
+                ${overview}
+            </div>
         
         `
         main.appendChild(movieEl)
     })
-
-    return respData
 }
 
 function getClassByRate(vote){
@@ -38,4 +53,13 @@ function getClassByRate(vote){
     }
 }
 
-getMovies()
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const searchTerm = search.value
+
+    if(searchTerm){
+        getMovies(searchapi + searchTerm)
+        search.value = ''
+    }
+}) 
