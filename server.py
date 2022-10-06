@@ -32,11 +32,9 @@ class WebServer:
 
     def __getPath(self, file):
         current_directory = os.getcwd()
-        list_files = os.listdir(current_directory + '/' + os.listdir()[0])
-        
+        list_files = os.listdir()
         if file.split('/')[1] in list_files:
-            path = glob.glob('Servidor/*')
-            
+            path = glob.glob(current_directory + '/*')
             for i in path:
                 if file in i:
                     print(f'caminho-i: {i}')
