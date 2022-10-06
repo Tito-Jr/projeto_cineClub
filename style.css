@@ -1,21 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee&family=Monoton&family=Poppins:wght@200;400;600&family=Righteous&display=swap');
 * {
     box-sizing: border-box;
 }
 
 body {
     background-color: #22254b;
+    background-image: linear-gradient(135deg, #22254b 10%, #572c7e 40%, #1d557e 100%);
     font-family: 'poppins', sans-serif;
     margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.7rem 4rem;
 }
 
 h1 {
     display: flex;  
     font-style: bold;
-    justify-content: center;
+    justify-content: left;
+    padding: 0.5rem 5rem;
     color: #eee;
-    font-family: 'poppins', sans-serif;
+    font-family: 'Audiowide', fantasy;
     letter-spacing: 1px;
+    animation: neon 10s infinite;
+}
+
+@keyframes neon {
+    0%, 39%, 41%, 59%, 61%, 100% {
+        text-shadow:
+        #eee 0 0 12px,
+        #ff3add 0 0 24px,
+        #ff3add 0 0 36px;
+    }
+    40%, 60% {
+        text-shadow: none;
+    } 
+}
+
+.search {
+    display: flex;
+    background-color: transparent;    
+    border: 2px solid #fffefe;
+    border-radius: 50px;
+    width: 400px;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.search::placeholder {
+    color:#7378c5 ;
+}
+
+.search:focus {
+    background-color: #7378c5 ;
+    outline: none;
 }
 
 main {
@@ -25,10 +66,11 @@ main {
 }
 
 .movie {
-    background-color: #373b69;
+    background-image: linear-gradient( 120deg, #3B2667 10%, #8934c6 100%);
     border-radius: 10px;
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    position: relative;
     margin: 1rem;
     width: 265px;
     
@@ -66,6 +108,27 @@ main {
 }
 .movie-info span.red {
     color: rgb(255, 2, 2);
+}
+
+.overview {
+    background-color: #eee;
+    position: absolute;
+    padding: 2rem;
+    max-height: 100%;
+    overflow: auto;
+    left: 0%;
+    bottom: 0%;
+    right: 0%;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in;
+}
+
+.overview h3 {
+    margin-top: 0;
+}
+
+.movie:hover .overview {
+    transform: translateY(0);
 }
 
 
