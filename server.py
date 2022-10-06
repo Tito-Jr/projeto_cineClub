@@ -31,7 +31,18 @@ class WebServer:
             print('Encerrando servidor.')
 
     def __getPath(self, file):
-        pass
+        current_directory = os.getcwd()
+        list_files = os.listdir(current_directory + '/' + os.listdir()[0])
+        
+        if file.split('/')[1] in list_files:
+            path = glob.glob('Servidor/*')
+            
+            for i in path:
+                if file in i:
+                    print(f'caminho-i: {i}')
+                    return i
+        else:
+            return 'None'
 
     def __response_header(self, request_file):
         pass
