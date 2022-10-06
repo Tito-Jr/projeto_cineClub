@@ -45,7 +45,20 @@ class WebServer:
             return 'None'
 
     def __response_header(self, request_file):
-        pass
+        file = self.__getPath(request_file)
+
+        if file != 'None':
+            response = 'HTTP/1.0 200 OK\r\n'
+            if request_file.split('.')[1] in ['html', 'css']:
+                response += 'Content-Type: text/{}\r\n\r\n' .format(request_file.split('.')[1])
+                return str(response + open(file, 'r').read()).encode()
+            elif request_file.split('.')[1] in ['ico', 'png', 'jpg']:
+                response += 'Content-Type: image/{}\r\n\r\n' .format(request_file.split('.')[1])
+                return str(response).encode() + open(file, 'rb').read()
+            else:
+                return str(response + '\r\n' + open(file, 'r').read()).encode()
+        else:
+            return str('HTTP/1.1 404 NOT FOUND\n\n<h1>File Not Found</h1>').encode()
 
     def __get(self, request_file):
         pass
