@@ -39,6 +39,31 @@ h1 {
     } 
 }
 
+h2 {
+    display: flex;  
+    font-style: bold;
+    font-size: 2rem;
+    margin-top: 5rem;
+    justify-content: left;
+    padding: 1rem 5rem;
+    color: #eee;
+    font-family: 'Audiowide', fantasy;
+    letter-spacing: 1px;
+    animation: neon 10s infinite;
+}
+
+@keyframes neon {
+    0%, 39%, 41%, 59%, 61%, 100% {
+        text-shadow:
+        #eee 0 0 12px,
+        #ff3add 0 0 24px,
+        #ff3add 0 0 36px;
+    }
+    40%, 60% {
+        text-shadow: none;
+    } 
+}
+
 .search {
     display: flex;
     background-color: transparent;    
@@ -114,7 +139,7 @@ main {
     background-color: #eee;
     position: absolute;
     padding: 2rem;
-    max-height: 100%;
+    max-height: 50%;
     overflow: auto;
     left: 0%;
     bottom: 0%;
@@ -129,6 +154,38 @@ main {
 
 .movie:hover .overview {
     transform: translateY(0);
+}
+
+.fav-btn, .comment-btn {
+    background-color: transparent;
+    border: none;
+    color: gray;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.fav-btn.active {
+    color: #ff3add;
+}
+
+input, textarea {
+    background-color: transparent;
+    display: block;
+    margin-top: 0.3rem;
+    margin-bottom: 0.7rem;
+}
+
+::placeholder {
+    color:#fff;
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+}
+
+form button {
+    background: #3B2667;
+    color:#fff;
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
 }
 
 

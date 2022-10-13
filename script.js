@@ -6,6 +6,7 @@ const main = document.getElementById('main')
 const form = document.getElementById('form')
 const search = document.getElementById('search')
 
+
 getMovies(apiurl)
 
 async function getMovies(url){
@@ -26,6 +27,13 @@ function showMovies(movies) {
         movieEl.classList.add('movie')
 
         movieEl.innerHTML = `
+        
+            <button class="fav-btn">
+                <i class="fas fa-heart"></i>
+            </button>
+            <button class="comment-btn">
+                <i class="fa-regular fa-comment"></i>
+            </button>
             <img src="${imgpath + poster_path}" 
             alt="${title}">
             <div class="movie-info">
@@ -39,6 +47,23 @@ function showMovies(movies) {
             </div>
         
         `
+        
+        const favBtn = movieEl.querySelector('.fav-btn') //incluir o armazenamento no banco de dados e extração pra botar na area de fav
+        favBtn.addEventListener("click", () => {
+            favBtn.classList.toggle("active")
+        })
+
+        const commentBtn = movieEl.querySelector('.comment-btn') //incluir no action o endereço do servidor
+        commentBtn.addEventListener("click", () => {
+            movieEl.innerHTML = `
+            <form action="" method="post"> 
+            <input type="text" name="nome" placeholder="nome">
+            <input type="text" name="email" placeholder="email">
+            <textarea name="resenha" cols="30" rows="10" placeholder="escreva sua resenha"></textarea>
+            <button>postar</button>
+            </form>`
+        })
+
         main.appendChild(movieEl)
     })
 }
