@@ -6,13 +6,11 @@ const main = document.getElementById('main')
 const form = document.getElementById('form')
 const search = document.getElementById('search')
 
-
 getMovies(apiurl)
 
 async function getMovies(url){
     const resp = await fetch(url)
     const respData = await resp.json()
-
 
     showMovies(respData.results)
 }
@@ -47,23 +45,30 @@ function showMovies(movies) {
             </div>
         
         `
-        
+    
         const favBtn = movieEl.querySelector('.fav-btn') //incluir o armazenamento no banco de dados e extração pra botar na area de fav
         favBtn.addEventListener("click", () => {
             favBtn.classList.toggle("active")
+            console.log(title)
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/favoritos");
+            xhr.send('***' + title)
         })
 
         const commentBtn = movieEl.querySelector('.comment-btn') //incluir no action o endereço do servidor
         commentBtn.addEventListener("click", () => {
+            let nome = title
             movieEl.innerHTML = `
-            <form action="" method="post"> 
-            <input type="text" name="nome" placeholder="nome">
-            <input type="text" name="email" placeholder="email">
-            <textarea name="resenha" cols="30" rows="10" placeholder="escreva sua resenha"></textarea>
-            <button>postar</button>
+            <form action="salvar_resenha" method="post"> 
+                <input type="hidden" name="tituloFilme" value="${title}">
+                <input type="text" name="nome" placeholder="nome">
+                <input type="text" name="email" placeholder="email">
+                <textarea name="resenha" cols="30" rows="10" placeholder="escreva sua resenha"></textarea>
+                <button>postar</button>
             </form>`
         })
 
+        history.pushState({}, null, '/index.html');
         main.appendChild(movieEl)
     })
 }
@@ -88,3 +93,22 @@ form.addEventListener('submit', (e) => {
         search.value = ''
     }
 }) 
+
+var xhttp = new XMLHttpRequest();
+xhttp.open("GET", '/favoritos', true);
+
+xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
+    if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo
+        result = xhttp.responseText
+        console.log(result);
+        const fav = document.getElementById('favoritos')
+        vetor = result.split('-')
+        
+        for (var i = 0; i < vetor.length; i++) {
+            fav.innerHTML += '<br>' + vetor[i]
+        }
+         
+    }
+}
+
+xhttp.send();
