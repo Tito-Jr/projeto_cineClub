@@ -1,3 +1,4 @@
+import db
 import os
 import glob
 import socket
@@ -18,10 +19,14 @@ class WebServer:
                 print('Endereço do Cliente: {}' .format(adr))
 
                 request = conn.recv(1024).decode()
+                request_post = str(request)
                 request_list = str(request).split(' ')
 
                 print(request_list[0], request_list[1])
-                response = self.__get(request_list[1])
+                if request_list[0] == 'GET':
+                    response = self.__get(request_list[1])
+                elif request_list[0] == 'POST':
+                    response = self.__post(request_list, request_post)
                 conn.sendall(response)
                 conn.close()
 
@@ -56,13 +61,36 @@ class WebServer:
             else:
                 return str(response + '\r\n' + open(file, 'r').read()).encode()
         else:
-            return str('HTTP/1.1 404 NOT FOUND\n\n<h1>File Not Found</h1>').encode()
+            return str('HTTP/1.0 404 NOT FOUND\r\n<h1>File Not Found</h1>').encode()
 
     def __get(self, request_file):
         if request_file == '/':
             return self.__response_header('/index.html')
+        elif request_file == '/favoritos':
+            lista = db.select()
+            if lista != '':
+                print('servidor:', lista)
+                return str('HTTP/1.0 200 OK\r\n\r\n' + lista).encode()
+            else:
+                return str('HTTP/1.0 200 OK\r\n\r\nNone!').encode()
         else:
             return self.__response_header(request_file)
 
-    def __post(self):
-        pass
+    def __post(self, request, request_post):
+        if request[1] == '/salvar_resenha':
+            dados = str(request[len(request)-1]).split('=')
+            dados.pop(0)
+            print(dados)
+
+            dados[0] = dados[0].replace('+', ' ').replace('&nome', '').replace('%3A', '')
+            dados[1] = dados[1].replace('&email', '').replace('+', '')
+            dados[2] = dados[2].replace('&resenha', '').replace('%40', '@')
+            dados[3] = dados[3].replace('+', ' ')
+            print('Dados Inseridos: ', dados)
+
+            db.insert(dados[0], dados[1], dados[2], dados[3])
+            return self.__get('/index.html')
+        elif request[1] == '/favoritos':
+            print(request_post.split('***')[1])
+            db.insertFav(request_post.split('***')[1])
+            return self.__get('/index.html')
