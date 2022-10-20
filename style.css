@@ -8,6 +8,7 @@ body {
     background-image: linear-gradient(135deg, #22254b 10%, #572c7e 40%, #1d557e 100%);
     font-family: 'poppins', sans-serif;
     margin: 0;
+    position: absolute;
 }
 
 header {
@@ -187,5 +188,68 @@ form button {
     font-family: 'poppins', sans-serif;
     font-weight: bold;
 }
+
+.login {
+    background-color: #3B2667;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 198vh;
+    padding: 1rem;
+    margin-top: 20rem;
+    border-radius: 10px;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login input {
+    font-family: 'poppins', sans-serif;
+    font-weight: bold;
+    color: #dbf1fd;
+    font-size: 1.2rem;
+    padding-left: 1.2rem;
+    height: 2rem;
+    margin-top: 1rem;
+    background-color: #7378c5;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+}
+
+form [type="submit"] {
+    display: block;
+    background-color: #363a78;
+    cursor: pointer;
+}
+
+nav {
+    font-size: 1.2rem;
+}
+
+nav a {
+    position: absolute;
+    padding-left: 1rem;
+    top: 1rem;
+    right: 2rem;
+}
+
+p {
+    color: #dbf1fd;
+}
+
+a {
+    font-weight: bold;
+    color: #8934c6;
+    text-decoration: none;
+}
+
+p a {
+    font-size: 1.2rem;
+}
+
+
 
 
