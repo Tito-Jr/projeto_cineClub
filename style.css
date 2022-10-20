@@ -40,31 +40,6 @@ h1 {
     } 
 }
 
-h2 {
-    display: flex;  
-    font-style: bold;
-    font-size: 2rem;
-    margin-top: 5rem;
-    justify-content: left;
-    padding: 1rem 5rem;
-    color: #eee;
-    font-family: 'Audiowide', fantasy;
-    letter-spacing: 1px;
-    animation: neon 10s infinite;
-}
-
-@keyframes neon {
-    0%, 39%, 41%, 59%, 61%, 100% {
-        text-shadow:
-        #eee 0 0 12px,
-        #ff3add 0 0 24px,
-        #ff3add 0 0 36px;
-    }
-    40%, 60% {
-        text-shadow: none;
-    } 
-}
-
 .search {
     display: flex;
     background-color: transparent;    
@@ -187,6 +162,16 @@ form button {
     color:#fff;
     font-family: 'poppins', sans-serif;
     font-weight: bold;
+}
+
+.favs {
+    color: #eee;
+    font-family: 'poppins', sans-serif;
+    font-style: bold;
+    justify-content: left;
+    padding: 0.5rem 0rem 1rem;
+    letter-spacing: 1px;
+
 }
 
 .login {
