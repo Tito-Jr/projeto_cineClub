@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cine Club - Registro</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico')}}">
+        <script src="{{ url_for('static', filename='script.js')}}" defer></script>
+    </head>
+</head>
+<body>
+    <div class="login">
+        <form action="registrar" method="post">
+            <input type="text" name="nome" placeholder="Nome de Usuário" autofocus>
+            <input type="text" name="email" placeholder="Email">
+            <input type="password" name="senha" placeholder="Senha">
+            <input type="submit" value="Criar conta">
+        </form>
+    </div>
+</body>
+</html>

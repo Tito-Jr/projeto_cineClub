@@ -3,6 +3,7 @@ const imgpath = 'http://image.tmdb.org/t/p/w1280'
 const searchapi = 'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query='
 
 const main = document.getElementById('main')
+const app = document.getElementById('app')
 const form = document.getElementById('form')
 const search = document.getElementById('search')
 
@@ -46,13 +47,13 @@ function showMovies(movies) {
         
         `
     
-        const favBtn = movieEl.querySelector('.fav-btn') //incluir o armazenamento no banco de dados e extração pra botar na area de fav
+        const favBtn = movieEl.querySelector('.fav-btn') 
         favBtn.addEventListener("click", () => {
             favBtn.classList.toggle("active")
             console.log(title)
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "/favoritos");
-            xhr.send('***' + title)
+            xhr.send(title)
         })
 
         const commentBtn = movieEl.querySelector('.comment-btn') //incluir no action o endereço do servidor
@@ -92,7 +93,17 @@ form.addEventListener('submit', (e) => {
         getMovies(searchapi + searchTerm)
         search.value = ''
     }
-}) 
+})
+
+document.querySelectorAll('[mynav]').forEach(link => {
+    const conteudo = document.getElementById('conteudo')
+    link.onclick = function(e){
+        e.preventDefault()                
+        fetch(link.getAttribute('mynav'))
+            .then(resp => resp.text())
+            .then(html => app.innerHTML = html)
+    }
+})
 
 var xhttp = new XMLHttpRequest();
 xhttp.open("GET", '/favoritos', true);
